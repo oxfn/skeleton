@@ -1,7 +1,7 @@
 [user]
-	name = oxfn
-	email = oxfn@ya.ru
+    name = oxfn
+    email = oxfn@ya.ru
 [alias]
     co = checkout 
 [core]
-	excludesfile = ~/gitignore.txt
+    excludesfile = ~/gitignore.txt
