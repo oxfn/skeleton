@@ -49,6 +49,10 @@ git-aliases-off() {
 
 # Pastebins aliases
 pastebins-on() {
+    if [ ! -e /usr/bin/curl ]
+    then
+        return
+    fi
     alias pb-sprunge='curl -F "sprunge=<-" http://sprunge.us'
     alias pb-ixio='curl -n -F "f:1=<-" http://ix.io'
 }    
