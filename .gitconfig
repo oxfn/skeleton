@@ -1,9 +1,9 @@
 [user]
     name = oxfn
     email = oxfn@ya.ru
-[alias]
-    co = checkout 
 [core]
     excludesfile = ~/gitignore.txt
 [push]
-	default = simple
+    default = simple
+[color]
+    ui = auto
