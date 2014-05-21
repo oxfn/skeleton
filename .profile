@@ -18,10 +18,8 @@ findlastmod() {
 git-aliases-on() {
     GIT_ALIASES='a b c co d ds dc dcs l m psh pll r s st stl stp'
     alias a='git add'
-    alias aa='git add .'
     alias b='git branch'
     alias c='git commit'
-    alias cm='git commit -m'
     alias co='git checkout'
     alias d='git diff'
     alias ds='git diff --stat'
