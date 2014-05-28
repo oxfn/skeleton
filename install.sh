@@ -1,2 +1,2 @@
 #!/bin/sh
-cp -R .git/ .gitconfig .profile .vim/ .vimrc ~/
+cp -R .gitconfig .profile .vim/ .vimrc ~/
