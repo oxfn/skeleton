@@ -1,11 +1,11 @@
 # Common functions
 findlastmod() {
-    if [ "$1" -eq "" ]
+    if [ "$1" != "" ]
     then
         echo "Usage: $0 <path> [count]"
         return
     fi    
-    if [ "$2" -ne "" ]
+    if [ "$2" != "" ]
     then
         N=$2
     else

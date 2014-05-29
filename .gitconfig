@@ -4,6 +4,6 @@
 [core]
     excludesfile = ~/gitignore.txt
 [push]
-    default = simple
+    default = current
 [color]
     ui = auto
