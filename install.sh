@@ -43,5 +43,18 @@ do
 done
 popd > /dev/null
 
+# NERDTree
+PLUGIN=nerdtree
+URL=https://github.com/scrooloose/nerdtree
+PLUGIN_PATH=$VIM_TMP_PATH/$PLUGIN
+echo Installing Vim plugin: $PLUGIN
+git clone -q --depth=0 $URL $PLUGIN_PATH
+pushd $PLUGIN_PATH > /dev/null
+for item in */
+do
+    cp -R $item $VIM_INSTALL_PATH
+done
+popd > /dev/null
+
 rm -rf $VIM_TMP_PATH
 
