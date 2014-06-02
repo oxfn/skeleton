@@ -1,8 +1,10 @@
 # Common functions
+
+# Find N fresh files in directory recursively
 findlastmod() {
-    if [ "$1" != "" ]
+    if [ "$1" == "" ]
     then
-        echo "Usage: $0 <path> [count]"
+        echo "Usage: findlastmod <path> [count]"
         return
     fi    
     if [ "$2" != "" ]
