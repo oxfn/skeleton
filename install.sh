@@ -8,6 +8,8 @@ VIM_INSTALL_PATH=~/.vim
 VIM_TMP_PATH=/tmp/vim-plugins
 VIM_PLUGIN_DIRS='autoload doc plugin'
 
+GIT_CLONE='git clone -q --depth=1'
+
 mkdir -p $VIM_TMP_PATH
 mkdir -p $VIM_INSTALL_PATH
 
@@ -17,9 +19,9 @@ URL=https://github.com/mattn/emmet-vim
 PLUGIN_PATH=$VIM_TMP_PATH/$PLUGIN
 ARCHIVE_NAME=emmet-vim.zip
 echo Installing Vim plugin: $PLUGIN
-git clone -q --depth=0 $URL $PLUGIN_PATH
+$GIT_CLONE $URL $PLUGIN_PATH > /dev/null
 pushd $PLUGIN_PATH > /dev/null
-make > /dev/null
+make 1<&2 > /dev/null
 unzip -uo $ARCHIVE_NAME -d $VIM_INSTALL_PATH > /dev/null
 popd > /dev/null
 
@@ -28,7 +30,7 @@ PLUGIN=bufexplorer
 URL=https://github.com/jlanzarotta/bufexplorer
 PLUGIN_PATH=$VIM_TMP_PATH/$PLUGIN
 echo Installing Vim plugin: $PLUGIN
-git clone -q --depth=0 $URL $PLUGIN_PATH
+$GIT_CLONE $URL $PLUGIN_PATH > /dev/null
 pushd $PLUGIN_PATH > /dev/null
 if [ ! -d $PLUGIN_INSTALL_PATH ]
 then
@@ -48,7 +50,7 @@ PLUGIN=nerdtree
 URL=https://github.com/scrooloose/nerdtree
 PLUGIN_PATH=$VIM_TMP_PATH/$PLUGIN
 echo Installing Vim plugin: $PLUGIN
-git clone -q --depth=0 $URL $PLUGIN_PATH
+$GIT_CLONE $URL $PLUGIN_PATH > /dev/null
 pushd $PLUGIN_PATH > /dev/null
 for item in */
 do
