@@ -52,10 +52,17 @@ PLUGIN_PATH=$VIM_TMP_PATH/$PLUGIN
 echo Installing Vim plugin: $PLUGIN
 $GIT_CLONE $URL $PLUGIN_PATH > /dev/null
 pushd $PLUGIN_PATH > /dev/null
-for item in */
-do
-    cp -R $item $VIM_INSTALL_PATH
-done
+cp -R */ $VIM_INSTALL_PATH
+popd > /dev/null
+
+# NERDCommanter
+PLUGIN=nerdcommenter
+URL=https://github.com/scrooloose/nerdcommenter
+PLUGIN_PATH=$VIM_TMP_PATH/$PLUGIN
+echo Installing Vim plugin: $PLUGIN
+$GIT_CLONE $URL $PLUGIN_PATH > /dev/null
+pushd $PLUGIN_PATH > /dev/null
+cp -R */ $VIM_INSTALL_PATH
 popd > /dev/null
 
 rm -rf $VIM_TMP_PATH
