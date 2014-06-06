@@ -1,3 +1,6 @@
+### TODO: 
+###     - Configuration section on top of .profile
+
 ###
 ### Find N fresh files in directory recursively
 ###
