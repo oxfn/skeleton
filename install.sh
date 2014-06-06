@@ -1,6 +1,8 @@
 #!/bin/sh
 cp -R .gitconfig .profile .vimrc ~/
 
+### TODO: ask for vim plugins installation
+
 #
 # Vim plugins
 #

@@ -1,6 +1,6 @@
-# Common functions
-
-# Find N fresh files in directory recursively
+###
+### Find N fresh files in directory recursively
+###
 findlastmod() {
     if [ "$1" == "" ]
     then
@@ -16,9 +16,41 @@ findlastmod() {
     find $1 -type f -exec stat --format '%Y :%y %n' {} \; | sort -nr | cut -d: -f2- | head -n $N
 }
 
-# Git aliases on
+###
+### Disable list of aliases
+###
+aliases-off() {
+    if [ $# -lt 2 ]
+    then
+        return
+    fi
+    #echo ALIASES \($@\) -\> OFF
+    for item in $@
+    do
+        unalias $item
+    done
+}
+
+###
+### Common aliases
+###
+common-aliases-on() {
+    COMMON_ALIASES='ll dfh duhs'
+    #echo ALIASES \($COMMON_ALIASES\) -\> ON
+    alias ll='ls -la --color'
+    alias df='dfh -h'
+    alias du='duhs -hs'
+}
+common-aliases-off() {
+    aliases-off $COMMON_ALIASES
+}
+
+###
+### Git aliases on
+###
 git-aliases-on() {
     GIT_ALIASES='a b c co d ds dc dcs l m psh pll r s st stl stp'
+    #echo ALIASES \($GIT_ALIASES\) -\> ON
     alias a='git add'
     alias b='git branch'
     alias c='git commit'
@@ -37,28 +69,30 @@ git-aliases-on() {
     alias stl='git stash list'
     alias stp='git stash pop'
 }
-
-# Git aliases off
 git-aliases-off() {
-    for item in $GIT_ALIASES
-    do
-        echo $item
-        unalias $item
-    done
+    aliases-off $GIT_ALIASES
 }
 
-# Pastebins aliases
-pastebins-on() {
+###
+### Pastebins aliases
+###
+pastebins-aliases-on() {
     if [ ! -e /usr/bin/curl ]
     then
         return
     fi
+    PASTEBINS_ALIASES='pb-sprunge pb-ixio'
+    #echo ALIASES \($PASTEBINS_ALIASES\) -\> ON
     alias pb-sprunge='curl -F "sprunge=<-" http://sprunge.us'
     alias pb-ixio='curl -n -F "f:1=<-" http://ix.io'
 }    
+pastebins-aliases-off() {
+    aliases-off $PASTEBINS_ALIASES
+}
 
-#
-# Apply sections
-#
+###
+### Apply sections
+###
+common-aliases-on
 git-aliases-on
-pastebins-on
+pastebins-aliases-on
