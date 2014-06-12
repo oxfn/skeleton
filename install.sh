@@ -23,7 +23,7 @@ ARCHIVE_NAME=emmet-vim.zip
 echo Installing Vim plugin: $PLUGIN
 $GIT_CLONE $URL $PLUGIN_PATH > /dev/null
 pushd $PLUGIN_PATH > /dev/null
-make 1<&2 > /dev/null
+make 1>/dev/null 2>/dev/null
 unzip -uo $ARCHIVE_NAME -d $VIM_INSTALL_PATH > /dev/null
 popd > /dev/null
 
