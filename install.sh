@@ -1,5 +1,9 @@
 #!/bin/sh
-cp -R .gitconfig .profile .vimrc ~/
+cp .gitconfig ~/
+cp .bashrc ~/
+cp .bash_profile ~/
+cp .profile ~/
+cp .vimrc ~/
 
 ### TODO: ask for vim plugins installation
 
@@ -23,8 +27,7 @@ ARCHIVE_NAME=emmet-vim.zip
 echo Installing Vim plugin: $PLUGIN
 $GIT_CLONE $URL $PLUGIN_PATH > /dev/null
 pushd $PLUGIN_PATH > /dev/null
-make 1>/dev/null 2>/dev/null
-unzip -uo $ARCHIVE_NAME -d $VIM_INSTALL_PATH > /dev/null
+cp -R */ $VIM_INSTALL_PATH > /dev/null
 popd > /dev/null
 
 # BufExplorer
@@ -54,7 +57,7 @@ PLUGIN_PATH=$VIM_TMP_PATH/$PLUGIN
 echo Installing Vim plugin: $PLUGIN
 $GIT_CLONE $URL $PLUGIN_PATH > /dev/null
 pushd $PLUGIN_PATH > /dev/null
-cp -R */ $VIM_INSTALL_PATH
+cp -R */ $VIM_INSTALL_PATH > /dev/null
 popd > /dev/null
 
 # NERDCommanter
@@ -64,7 +67,7 @@ PLUGIN_PATH=$VIM_TMP_PATH/$PLUGIN
 echo Installing Vim plugin: $PLUGIN
 $GIT_CLONE $URL $PLUGIN_PATH > /dev/null
 pushd $PLUGIN_PATH > /dev/null
-cp -R */ $VIM_INSTALL_PATH
+cp -R */ $VIM_INSTALL_PATH > /dev/null
 popd > /dev/null
 
 rm -rf $VIM_TMP_PATH
