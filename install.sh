@@ -2,7 +2,7 @@
 
 for item in .gitconfig .bashrc .bashrc.local .bash_profile .profile .vimrc
 do
-    cp -n $item ~/
+    cp -i $item ~/
 done
 
 #
