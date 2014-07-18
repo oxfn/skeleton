@@ -40,9 +40,10 @@ aliases-off() {
 common-aliases-on() {
     COMMON_ALIASES='ll dfh duhs'
     #echo ALIASES \($COMMON_ALIASES\) -\> ON
-    alias ll='ls -la --color'
     alias dfh='df -h'
     alias duhs='du -hs'
+    alias ll='ls -l --color'
+    alias scr='screen -r'
 }
 common-aliases-off() {
     aliases-off $COMMON_ALIASES
