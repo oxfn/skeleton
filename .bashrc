@@ -99,3 +99,6 @@ pastebins-aliases-off() {
 common-aliases-on
 git-aliases-on
 pastebins-aliases-on
+
+# Run local .bashrc
+[[ -r ~/.bashrc.local ]] && source ~/.bashrc.local
