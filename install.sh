@@ -1,10 +1,9 @@
 #!/bin/sh
 
-cp .gitconfig ~/
-cp .bashrc ~/
-cp .bash_profile ~/
-cp .profile ~/
-cp .vimrc ~/
+for item in .gitconfig .bashrc .bashrc.local .bash_profile .profile .vimrc
+do
+    cp -n $item ~/
+done
 
 #
 # Vim plugins
