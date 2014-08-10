@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 for item in .gitconfig .bashrc .bashrc.local .bash_profile .profile .vimrc
 do
