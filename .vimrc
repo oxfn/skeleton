@@ -13,6 +13,7 @@ set noswapfile
 set number
 set ruler
 set shiftwidth=4
+set softtabstop=4
 set t_vb=
 set tabstop=4
 
@@ -20,6 +21,7 @@ set tabstop=4
 nmap <F2> :w<CR>
 imap <F2> <Esc>:w<CR>i
 nmap <F3> :call NERDComment('n', 'Toggle')<CR>
+nmap <F9> :nohlsearch<CR>
 nmap <F11> :NERDTreeToggle<CR>
 nmap <F12> :BufExplorer<CR>
 
