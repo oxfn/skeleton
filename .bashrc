@@ -43,6 +43,8 @@ common-aliases-on() {
     alias dfh='df -h'
     alias duhs='du -hs'
     alias ll='ls -l --color'
+    alias la='ls -a --color'
+    alias lla='ls -la --color'
     alias scr='screen -r'
 }
 common-aliases-off() {

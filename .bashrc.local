@@ -1,2 +1,4 @@
 # Host-specific .bashrc
 
+#alias cygsetup='/cygdrive/c/Temp/CygSetup/setup-x86_64.exe'
+
