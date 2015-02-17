@@ -27,7 +27,6 @@ aliases-off() {
     then
         return
     fi
-    #echo ALIASES \($@\) -\> OFF
     for item in $@
     do
         unalias $item
@@ -39,7 +38,6 @@ aliases-off() {
 ###
 common-aliases-on() {
     COMMON_ALIASES='ll dfh duhs'
-    #echo ALIASES \($COMMON_ALIASES\) -\> ON
     alias dfh='df -h'
     alias duhs='du -hs'
     alias ll='ls -l --color'
@@ -56,7 +54,6 @@ common-aliases-off() {
 ###
 git-aliases-on() {
     GIT_ALIASES='a b c co d ds dc dcs l m psh pll r s st stl stp'
-    #echo ALIASES \($GIT_ALIASES\) -\> ON
     alias a='git add'
     alias b='git branch'
     alias c='git commit'
@@ -89,7 +86,6 @@ pastebins-aliases-on() {
         return
     fi
     PASTEBINS_ALIASES='pb-sprunge pb-ixio'
-    #echo ALIASES \($PASTEBINS_ALIASES\) -\> ON
     alias pb-sprunge='curl -F "sprunge=<-" http://sprunge.us'
     alias pb-ixio='curl -n -F "f:1=<-" http://ix.io'
 }    
@@ -98,11 +94,24 @@ pastebins-aliases-off() {
 }
 
 ###
+### SVN aliases
+###
+svn-aliases-on() {
+    SVN_ALIASES='svn-add-all svn-cleanup-missing'
+    alias svn-add-all='svn add --force ./'
+    alias svn-cleanup-missing='svn status | grep -e '^!' | sed -e 's/^!\s\+//' | xargs svn rm'
+}
+svn-aliases-off() {
+    aliases-off $SVN_ALIASES
+}
+
+###
 ### Apply sections
 ###
 common-aliases-on
 git-aliases-on
 pastebins-aliases-on
+svn-aliases-on
 
 # Run local .bashrc
 [[ -r ~/.bashrc.local ]] && source ~/.bashrc.local
