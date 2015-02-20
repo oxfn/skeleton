@@ -98,8 +98,10 @@ pastebins-aliases-off() {
 ###
 svn-aliases-on() {
     SVN_ALIASES='svn-add-all svn-cleanup-missing'
-    alias svn-add-all='svn add --force ./'
-    alias svn-cleanup-missing='svn status | grep -e '^!' | sed -e 's/^!\s\+//' | xargs svn rm'
+    alias svnaddall='svn add --force ./'
+    alias svncleanup='svn status | grep -e "^\\!" | sed -e "s/^\\!\\s\\+//" | xargs svn rm'
+    alias svndiff='svn diff|more'
+    alias svnstatus='svn status'
 }
 svn-aliases-off() {
     aliases-off $SVN_ALIASES
