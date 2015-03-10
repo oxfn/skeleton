@@ -20,6 +20,10 @@ findlastmod() {
 }
 
 ###
+### Get current git branch
+###
+
+###
 ### Disable list of aliases
 ###
 aliases-off() {
@@ -114,6 +118,33 @@ common-aliases-on
 git-aliases-on
 pastebins-aliases-on
 svn-aliases-on
+
+###
+### Configuring git-aware prompt
+### Based on https://github.com/jimeh/git-aware-prompt
+###
+find_git_branch() {
+  # Based on: http://stackoverflow.com/a/13003854/170413
+  local branch
+  if branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
+    if [[ "$branch" == "HEAD" ]]; then
+      branch='detached*'
+    fi
+    git_branch="($branch)"
+  else
+    git_branch=""
+  fi
+}
+find_git_dirty() {
+  local status=$(git status --porcelain 2> /dev/null)
+  if [[ "$status" != "" ]]; then
+    git_dirty='*'
+  else
+    git_dirty=''
+  fi
+}
+PROMPT_COMMAND="find_git_branch; find_git_dirty; $PROMPT_COMMAND"
+PS1="\[\e[0;32m\u@\h\e[0m\] \e[0;33m\W\e[0m \e[0;36m\$git_branch\e[0;31m\$git_dirty\e[0m "
 
 # Run local .bashrc
 [[ -r ~/.bashrc.local ]] && source ~/.bashrc.local
