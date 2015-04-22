@@ -126,25 +126,37 @@ svn-aliases-on
 find_git_branch() {
   # Based on: http://stackoverflow.com/a/13003854/170413
   local branch
-  if branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
+  branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+  if [[ $branch != "" ]]; then
     if [[ "$branch" == "HEAD" ]]; then
-      branch='detached*'
+      branch='\!detached\!'
     fi
-    git_branch="($branch)"
+    git_branch=$branch
+    git_branch_ps=" "
   else
-    git_branch=""
+    git_branch=''
+    git_branch_ps=''
   fi
 }
 find_git_dirty() {
-  local status=$(git status --porcelain 2> /dev/null)
+  local status=$(git status --porcelain 2>/dev/null)
   if [[ "$status" != "" ]]; then
     git_dirty='*'
   else
     git_dirty=''
   fi
 }
-PROMPT_COMMAND="find_git_branch; find_git_dirty; $PROMPT_COMMAND"
-PS1="\[\e[0;32m\u@\h\e[0m\] \e[0;33m\W\e[0m \e[0;36m\$git_branch\e[0;31m\$git_dirty\e[0m "
+set_PS1() {
+    find_git_dirty
+    find_git_branch
+    if [[ $git_branch != "" ]]
+    then
+        PS1="\[\e[0;32m\u@\h\e[0m\] \e[0;33m\W\e[0m \e[0;36m(\$git_branch)\e[0;31m\$git_dirty\e[0m "
+    else
+        PS1="\[\e[0;32m\u@\h\e[0m\] \e[0;33m\W\e[0m "
+    fi
+}
+PROMPT_COMMAND="set_PS1; $PROMPT_COMMAND"
 
 # Run local .bashrc
 [[ -r ~/.bashrc.local ]] && source ~/.bashrc.local
