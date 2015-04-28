@@ -66,6 +66,7 @@ git-aliases-on() {
     alias ds='git diff --stat'
     alias dc='git diff --cached'
     alias dcs='git diff --cached --stat'
+    alias f='git fetch'
     alias l='git log'
     alias lol='git log --oneline'
     alias m='git merge'
