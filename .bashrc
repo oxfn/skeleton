@@ -113,14 +113,6 @@ svn-aliases-off() {
 }
 
 ###
-### Apply sections
-###
-common-aliases-on
-git-aliases-on
-pastebins-aliases-on
-svn-aliases-on
-
-###
 ### Configuring git-aware prompt
 ### Based on https://github.com/jimeh/git-aware-prompt
 ###
@@ -157,7 +149,6 @@ set_PS1() {
         PS1="\[\e[0;32m\u@\h\e[0m\] \e[0;33m\W\e[0m "
     fi
 }
-PROMPT_COMMAND="set_PS1; $PROMPT_COMMAND"
 
 # Run local .bashrc
 [[ -r ~/.bashrc.local ]] && source ~/.bashrc.local

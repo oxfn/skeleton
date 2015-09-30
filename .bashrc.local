@@ -1,3 +1,16 @@
+# Apply sections
+
+#common-aliases-on
+#git-aliases-on
+#pastebins-aliases-on
+#svn-aliases-on
+
+
+# Set PROMPT with git info
+
+#PROMPT_COMMAND="set_PS1; $PROMPT_COMMAND"
+
+
 # Host-specific .bashrc
 
 #alias cygsetup='/cygdrive/c/Temp/CygSetup/setup-x86_64.exe'
