@@ -3,7 +3,8 @@
     email = oxfn@ya.ru
 [core]
     excludesfile = ~/gitignore.txt
-    autocrlf = true
+    ;eol = lf
+    autocrlf = input
 [push]
     default = current
 [color]

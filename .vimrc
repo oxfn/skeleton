@@ -5,17 +5,17 @@ set encoding=utf-8
 set expandtab
 set ignorecase
 set incsearch
-set mouse=a
+"set mouse=a
 set nobackup
 set nocompatible
 set noerrorbells
 set noswapfile
 set number
 set ruler
+set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set t_vb=
-set tabstop=4
 
 """Key mappings"""
 nmap <F2> :w<CR>
@@ -30,3 +30,5 @@ syntax on
 filetype plugin indent on
 colorscheme slate
 
+source ~/.vim/vimrc_vundle.vim
+source ~/.vim/vimrc_local.vim
