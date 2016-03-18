@@ -73,6 +73,7 @@ git-aliases-on() {
     alias psh='git push'
     alias pll='git pull'
     alias r='git reset'
+    alias rh='git reset --hard'
     alias s='git status'
     alias st='git stash'
     alias stl='git stash list'
