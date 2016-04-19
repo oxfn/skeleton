@@ -1,0 +1,7 @@
+URxvt*depth: 24
+URxvt*font: xft:mono:size=10
+URxvt*background: black
+URxvt*foreground: white
+URxvt*fade: 33
+URxvt*fadecolor: black
+URxvt*cursorColor: green
