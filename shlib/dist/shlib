@@ -1,0 +1,32 @@
+export STATUS_OK=0
+export STATUS_ERROR=1
+export CURRENT_LOG_LEVEL=0
+export LOG_LEVEL_ERROR=1
+export LOG_LEVEL_WARNING=2
+export LOG_LEVEL_INFO=3
+export LOG_LEVEL_DEBUG=4
+f_set_log_level() {
+    CURRENT_LOG_LEVEL=$1
+}
+f_get_log_level() {
+    echo $CURRENT_LOG_LEVEL
+}
+f_log() {
+    local level=$1
+    local message=$2
+    if [ $level -le $CURRENT_LOG_LEVEL ]; then 
+        echo $message 1>&2
+    fi
+}
+f_error() {
+    f_log $LOG_LEVEL_ERROR $@
+}
+f_warn() {
+    f_log $LOG_LEVEL_WARNING $@
+}
+f_info() {
+    f_log $LOG_LEVEL_INFO $@
+}
+f_debug() {
+    f_log $LOG_LEVEL_DEBUG $@
+}

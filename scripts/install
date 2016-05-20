@@ -32,8 +32,8 @@ fi
 # Install all items
 for item in $TARGETS
 do
-    echo Copying item to $HOME
-    cp -Ri $item $HOME
+    echo Copying $item to $HOME
+    cp -Ri profile/$item $HOME
 done
 
 # Install Vundle

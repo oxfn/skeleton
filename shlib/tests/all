@@ -5,7 +5,7 @@ _err=0
 t_begin() {
     let _cnt++
     let _err=0
-    echo -n "Test #$_cnt: $1 "
+    printf "Test #%02d: %-50s" $_cnt "$1"
 }
 t_err() {
     let _err++
@@ -18,9 +18,7 @@ t_end() {
     fi
 }
 
-PATH_ROOT=$(dirname $0)
-. core
-. log
+source shlib/dist/shlib
 
 t_begin 'Get current log level'
 [ $(f_get_log_level) -eq 0 ] || t_err
@@ -43,5 +41,15 @@ f_warn test 2>/tmp/stderr
 [ -e /tmp/stderr ] || t_err
 [ $(cat /tmp/stderr | wc -c) -eq 0 ] || t_err
 rm /tmp/stderr
+t_end
+
+t_begin 'Set logging level to DEBUG and check matching'
+f_set_log_level $LOG_LEVEL_DEBUG
+[ $(f_get_log_level) -eq 4 ] || t_err
+f_info 'info' 2>/tmp/stderr
+[[ "$(cat /tmp/stderr)" == 'info' ]] || t_err
+f_debug 'debug' 2>/tmp/stderr
+[[ "$(cat /tmp/stderr)" == 'debug' ]] || t_err
+[ -e /tmp/stderr ] || t_err
 t_end
 
