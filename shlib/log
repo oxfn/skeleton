@@ -1,0 +1,64 @@
+#!/bin/bash
+
+# @module: log
+# @description: Logging functionality
+# @author: oxfn
+# @created: 2016-05-20
+# @modified: 2016-05-20
+
+export CURRENT_LOG_LEVEL=0
+export LOG_LEVEL_ERROR=1
+export LOG_LEVEL_WARNING=2
+export LOG_LEVEL_INFO=3
+export LOG_LEVEL_DEBUG=4
+
+# @function: f_set_log_level()
+# @param: level
+# Set current log level
+f_set_log_level() {
+    CURRENT_LOG_LEVEL=$1
+}
+
+f_get_log_level() {
+    echo $CURRENT_LOG_LEVEL
+}
+
+# @function: f_log()
+# @param: level
+# Set current log level
+f_log() {
+    local level=$1
+    local message=$2
+    if [ $level -le $CURRENT_LOG_LEVEL ]; then 
+        echo $message 1>&2
+    fi
+}
+
+# @function: f_error
+# @param: message
+# Write message to STDERR of level ERROR
+f_error() {
+    f_log $LOG_LEVEL_ERROR $@
+}
+
+# @function: f_warn
+# @param: message
+# Write message to STDERR of level WARNING
+f_warn() {
+    f_log $LOG_LEVEL_WARNING $@
+}
+
+# @function: f_info
+# @param: message
+# Write message to STDERR of level INFO
+f_info() {
+    f_log $LOG_LEVEL_INFO $@
+}
+
+# @function: f_debug
+# @param: message
+# Write message to STDERR of level DEBUG
+f_debug() {
+    f_log $LOG_LEVEL_DEBUG $@
+}
+

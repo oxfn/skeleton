@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# @module: core
+# @description: Shlib core
+# @author: oxfn
+# @created: 2016-05-20
+# @modified: 2016-05-20
+
+export STATUS_OK=0
+export STATUS_ERROR=1
+
