@@ -8,10 +8,10 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'https://github.com/scrooloose/nerdtree'
-Plugin 'https://github.com/scrooloose/nerdcommenter'
-Plugin 'https://github.com/mattn/emmet-vim'
-Plugin 'https://github.com/jlanzarotta/bufexplorer'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'mattn/emmet-vim'
+Plugin 'jlanzarotta/bufexplorer'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
