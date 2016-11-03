@@ -3,7 +3,8 @@
 .DEFAULT: dist 
 
 SHLIBSRC = shlib/core \
-		   shlib/log
+		   shlib/log \
+		   shlib/net
 SHLIBDIST = shlib/dist/shlib
 SHLIBTEST = shlib/tests/all
 
