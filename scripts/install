@@ -1,5 +1,15 @@
 #!/bin/bash
 
+#
+#   TODO
+#
+#   [ ] Dynamic upgrade: ask for rewrite on startup
+#       [ ] Ask for rewrite of .dotfiles
+#       [ ] Ask to reinstall Vim plugins
+#   [ ] Use shlib
+#   [ ] Merge .bashrc.local configuration
+#
+
 SKELETON_FILE="$HOME/.skeleton"
 TARGETS="\
     .bash_profile
@@ -11,39 +21,42 @@ TARGETS="\
     .vimrc"
 VUNDLE_REPO="https://github.com/VundleVim/Vundle.vim.git"
 VUNDLE_PATH="$HOME/.vim/bundle/Vundle.vim"
+VUNDLE_INSTALLED=0
+if [[ -d ~/.vim/bundle/Vundle.vim ]]; then VUNDLE_INSTALLED=1; fi
 
 # Check if skeleton is already installed
 UPGRADE=0
 FORCE_DOTFILES=0
 FORCE_VIM_PLUGINS=0
-if [[ -f $SKELETON_FILE ]]
-then
-    UPGRADE=1
+if [[ -f $SKELETON_FILE ]]; then UPGRADE=1; fi
+if [ $UPGRADE == 1 ]; then
+    echo WARNING: upgrade mode
 fi
 
 # Detect git
 HAS_GIT=0
 git_path=$(which git 2>&1)
-if [[ $? -eq 0 ]]
-then
-    HAS_GIT=1
-fi
+if [[ $? -eq 0 ]]; then HAS_GIT=1; fi
 
 # Install all items
-for item in $TARGETS
-do
+for item in $TARGETS; do
+    if [[ -f $HOME/$item ]] && [[ $(diff profile/$item $HOME/$item) == "" ]]; then
+        echo INFO: $item is skipped as not changed
+        continue
+    fi
     echo Copying $item to $HOME
     cp -Ri profile/$item $HOME
 done
 
-# Install Vundle
-if [[ $HAS_GIT -eq 1 ]]
-then
-    mkdir ~/.vim/bundle
-    git clone $VUNDLE_REPO $VUNDLE_PATH
-    vim -c VundleInstall -c qa
-else
-    echo git was not found. Please install Vundle bundle manually
+# Install Vim plugins
+if [ $VUNDLE_INSTALLED != 1 ]; then
+    if [[ $HAS_GIT -eq 1 ]]; then
+        mkdir ~/.vim/bundle
+        git clone $VUNDLE_REPO $VUNDLE_PATH
+        vim -c VundleInstall -c qa
+    else
+        echo git was not found. Please install Vundle bundle manually
+    fi
 fi
 
 touch $SKELETON_FILE

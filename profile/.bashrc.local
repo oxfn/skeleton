@@ -1,17 +1,22 @@
-# Apply sections
+#
+#   Constants
+#
 
-#common-aliases-on
-#git-aliases-on
-#pastebins-aliases-on
-#svn-aliases-on
+SKELETON_VERSION='1.0.0'
 
+#
+#   Aliases
+#
 
-# Set PROMPT with git info
+common-aliases-on
+git-aliases-on
+pastebins-aliases-on
+svn-aliases-on
 
-#PROMPT_COMMAND="set_PS1; $PROMPT_COMMAND"
+#
+#   System tweaks
+#
 
-
-# Host-specific .bashrc
-
-#alias cygsetup='/cygdrive/c/Temp/CygSetup/setup-x86_64.exe'
+PROMPT_COMMAND="set_PS1; $PROMPT_COMMAND"
+force-256-colors
 

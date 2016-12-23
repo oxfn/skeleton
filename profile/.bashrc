@@ -1,9 +1,17 @@
-### TODO: 
-###     - Configuration section on top of .profile
+#    TODO: 
+#        - Configuration section on top of .profile
+#        - Move utility functions to shlib
 
-###
-### Find N fresh files in directory recursively
-###
+force-256-colors() {
+    if [ "$TERM" == "screen" ]
+    then
+        TERM="screen-256color"
+    fi
+}
+
+#
+#    Find N fresh files in directory recursively
+#
 findlastmod() {
     if [ "$1" == "" ]
     then
@@ -19,13 +27,9 @@ findlastmod() {
     find $1 -type f -exec stat --format '%Y :%y %n' {} \; | sort -nr | cut -d: -f2- | head -n $N
 }
 
-###
-### Get current git branch
-###
-
-###
-### Disable list of aliases
-###
+#
+#    Disable list of aliases
+#
 aliases-off() {
     if [ $# -lt 2 ]
     then
@@ -37,9 +41,9 @@ aliases-off() {
     done
 }
 
-###
-### Common aliases
-###
+#
+#    Common aliases
+#
 common-aliases-on() {
     COMMON_ALIASES='ll dfh duhs'
     alias dfh='df -h'
@@ -53,9 +57,9 @@ common-aliases-off() {
     aliases-off $COMMON_ALIASES
 }
 
-###
-### Git aliases on
-###
+#
+#    Git aliases on
+#
 git-aliases-on() {
     GIT_ALIASES='a b c co d ds dc dcs l m psh pll r s st stl stp'
     alias a='git add'
@@ -83,9 +87,9 @@ git-aliases-off() {
     aliases-off $GIT_ALIASES
 }
 
-###
-### Pastebins aliases
-###
+#
+#    Pastebins aliases
+#
 pastebins-aliases-on() {
     if [ ! -e /usr/bin/curl ]
     then
@@ -99,9 +103,9 @@ pastebins-aliases-off() {
     aliases-off $PASTEBINS_ALIASES
 }
 
-###
-### SVN aliases
-###
+#
+#    SVN aliases
+#
 svn-aliases-on() {
     SVN_ALIASES='svn-add-all svn-cleanup-missing'
     alias svnaddall='svn add --force ./'
@@ -113,10 +117,10 @@ svn-aliases-off() {
     aliases-off $SVN_ALIASES
 }
 
-###
-### Configuring git-aware prompt
-### Based on https://github.com/jimeh/git-aware-prompt
-###
+#
+#    Configuring git-aware prompt
+#    Based on https://github.com/jimeh/git-aware-prompt
+#
 find_git_branch() {
   # Based on: http://stackoverflow.com/a/13003854/170413
   local branch
@@ -145,9 +149,9 @@ set_PS1() {
     find_git_branch
     if [[ $git_branch != "" ]]
     then
-        PS1="\[\e[0;32m\u@\h\e[0m\] \e[0;33m\W\e[0m \e[0;36m(\$git_branch)\e[0;31m\$git_dirty\e[0m "
+        PS1="\[\e[0;32m\]\u@\h\[\e[0m\] \[\e[0;33m\]\W\[\e[0m\] \[\e[0;36m\](\$git_branch)\[\e[0;31m\]\$git_dirty\[\e[0m\] "
     else
-        PS1="\[\e[0;32m\u@\h\e[0m\] \e[0;33m\W\e[0m "
+        PS1="\[\e[0;32m\]\u@\h\[\e[0m\]\] \[\e[0;33m\]\W\[\e[0m\] "
     fi
 }
 
