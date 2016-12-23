@@ -80,6 +80,7 @@ git-aliases-on() {
     alias rh='git reset --hard'
     alias s='git status'
     alias st='git stash'
+    alias stk='git stash --keep-index'
     alias stl='git stash list'
     alias stp='git stash pop'
 }

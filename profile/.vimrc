@@ -24,6 +24,8 @@ nmap <F3> :call NERDComment('n', 'Toggle')<CR>
 nmap <F9> :nohlsearch<CR>
 nmap <F11> :NERDTreeToggle<CR>
 nmap <F12> :BufExplorer<CR>
+map <C-PAGEUP> :tabp
+map <C-PAGEDOWN> :tabn
 
 """Syntax and colorscheme"""
 syntax on
