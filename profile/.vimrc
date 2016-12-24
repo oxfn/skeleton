@@ -1,4 +1,4 @@
-"""Main settings"""
+""" Main settings
 set autoindent
 set backspace=indent,eol,start
 set encoding=utf-8
@@ -17,7 +17,7 @@ set shiftwidth=4
 set softtabstop=4
 set t_vb=
 
-"""Key mappings"""
+""" Key mappings
 nmap <F2> :w<CR>
 imap <F2> <Esc>:w<CR>i
 nmap <F3> :call NERDComment('n', 'Toggle')<CR>
@@ -27,10 +27,14 @@ nmap <F12> :BufExplorer<CR>
 map <C-PAGEUP> :tabp
 map <C-PAGEDOWN> :tabn
 
-"""Syntax and colorscheme"""
+"""Syntax and colorscheme
 syntax on
 filetype plugin indent on
 colorscheme slate
 
-source ~/.vim/vimrc_vundle.vim
-source ~/.vim/vimrc_local.vim
+""" Run vundle
+    source ~/.vim/vimrc_vundle.vim
+
+""" Run local rc
+    source ~/.vim/vimrc_local.vim
+
