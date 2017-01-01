@@ -11,7 +11,7 @@
 # @param method
 # @param headers
 # @param data
-# Execute cURL request
+# @description: Execute cURL request
 f_curl() {
     local url="$1"
     local method="$2"

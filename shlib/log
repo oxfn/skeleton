@@ -14,7 +14,7 @@ export LOG_LEVEL_DEBUG=4
 
 # @function: f_set_log_level()
 # @param: level
-# Set current log level
+# @description: Set current log level
 f_set_log_level() {
     CURRENT_LOG_LEVEL=$1
 }
@@ -25,7 +25,7 @@ f_get_log_level() {
 
 # @function: f_log()
 # @param: level
-# Set current log level
+# @description: Set current log level
 f_log() {
     local level=$1
     local message=$2
@@ -36,28 +36,28 @@ f_log() {
 
 # @function: f_error
 # @param: message
-# Write message to STDERR of level ERROR
+# @description: Write message to STDERR of level ERROR
 f_error() {
     f_log $LOG_LEVEL_ERROR $@
 }
 
 # @function: f_warn
 # @param: message
-# Write message to STDERR of level WARNING
+# @description: Write message to STDERR of level WARNING
 f_warn() {
     f_log $LOG_LEVEL_WARNING $@
 }
 
 # @function: f_info
 # @param: message
-# Write message to STDERR of level INFO
+# @description: Write message to STDERR of level INFO
 f_info() {
     f_log $LOG_LEVEL_INFO $@
 }
 
 # @function: f_debug
 # @param: message
-# Write message to STDERR of level DEBUG
+# @description: Write message to STDERR of level DEBUG
 f_debug() {
     f_log $LOG_LEVEL_DEBUG $@
 }

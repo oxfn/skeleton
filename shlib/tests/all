@@ -20,6 +20,10 @@ t_end() {
 
 source shlib/dist/shlib
 
+t_begin 'Read input'
+[ "$(echo 123 | f_read_line)" == "123" ] || t_err
+t_end
+
 t_begin 'Get current log level'
 [ $(f_get_log_level) -eq 0 ] || t_err
 t_end
