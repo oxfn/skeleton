@@ -33,8 +33,8 @@ filetype plugin indent on
 colorscheme slate
 
 """ Run vundle
-    source ~/.vim/vimrc_vundle.vim
+source ~/.vim/vimrc_vundle.vim
 
 """ Run local rc
-    source ~/.vim/vimrc_local.vim
+source ~/.vim/vimrc_local.vim
 
