@@ -1,27 +1,49 @@
 #!/bin/bash
 
 _cnt=0
-_err=0
+_errn=0
+declare -a _errs
 t_begin() {
+    let _errn=0
     let _cnt++
-    let _err=0
+    unset _errs
+    declare -a _errs
     printf "Test #%02d: %-50s" $_cnt "$1"
 }
 t_err() {
-    let _err++
+    if [ ! -z "$1" ]; then
+        _errs[$_errn]="$1"
+    fi
+    let _errn++
 }
 t_end() {
-    if [ $_err -eq 0 ]; then
+    if [ $_errn -eq 0 ]; then
         echo PASSED
     else
         echo FAILED
     fi
+    for e in "${_errs[@]}"; do
+        echo "   Error: ${e}"
+    done
+}
+t_file() {
+    local name="$1"
+    local rand="$RANDOM"
+    echo "/tmp/${name}.${rand}"
 }
 
 source shlib/dist/shlib
 
-t_begin 'Read input'
-[ "$(echo 123 | f_read_line)" == "123" ] || t_err
+t_begin 'Read line from standard input'
+res="$(echo 123 | f_read_line)"
+[ "$res"  == "123" ] || t_err
+t_end
+
+t_begin 'Read char from standard input'
+res="$(echo 9 | f_read_char)"
+[ "$res"  == "9" ] || t_err
+res="$(echo 321 | f_read_char)"
+[ "$res"  == "3" ] || t_err "Result is invalid"
 t_end
 
 t_begin 'Get current log level'
@@ -34,26 +56,30 @@ f_set_log_level $LOG_LEVEL_ERROR
 t_end
 
 t_begin 'Log error (level match)'
-f_error test 2>/tmp/stderr
-[ -e /tmp/stderr ] || t_err
-[[ "$(cat /tmp/stderr)" == 'test' ]] || t_err
-rm /tmp/stderr
+stderr=$(t_file stderr)
+echo $stderr
+f_error test 2> $stderr
+[ -f $stderr ] || t_err
+[[ "$(cat $stderr)" == '[ERR] test' ]] || t_err
+rm $stderr
 t_end
 
 t_begin 'Log warning (level mismatch)'
-f_warn test 2>/tmp/stderr
-[ -e /tmp/stderr ] || t_err
-[ $(cat /tmp/stderr | wc -c) -eq 0 ] || t_err
-rm /tmp/stderr
+stderr=$(t_file stderr)
+f_warn test 2> $stderr
+[ -f $stderr ] || t_err
+[ $(cat $stderr | wc -c) -eq 0 ] || t_err
+rm $stderr
 t_end
 
 t_begin 'Set logging level to DEBUG and check matching'
+stderr=$(t_file stderr)
 f_set_log_level $LOG_LEVEL_DEBUG
 [ $(f_get_log_level) -eq 4 ] || t_err
-f_info 'info' 2>/tmp/stderr
-[[ "$(cat /tmp/stderr)" == 'info' ]] || t_err
-f_debug 'debug' 2>/tmp/stderr
-[[ "$(cat /tmp/stderr)" == 'debug' ]] || t_err
-[ -e /tmp/stderr ] || t_err
+f_info 'Hello, error!' 2> $stderr
+[[ "$(cat $stderr)" == '[INF] Hello, error!' ]] || t_err
+f_debug 'Hello, world!' 2> $stderr
+[[ "$(cat $stderr)" == '[DBG] Hello, world!' ]] || t_err
+[ -f $stderr ] || t_err
 t_end
 

@@ -10,6 +10,8 @@
 #   [ ] Merge .bashrc.local configuration
 #
 
+SHLIB_DIST=shlib/dist/shlib
+SKELETON_DIR="$HOME/.skeleton"
 SKELETON_FILE="$HOME/.skeleton"
 TARGETS="\
     .bash_profile
@@ -23,15 +25,44 @@ VUNDLE_REPO="https://github.com/VundleVim/Vundle.vim.git"
 VUNDLE_PATH="$HOME/.vim/bundle/Vundle.vim"
 VUNDLE_INSTALLED=0
 if [[ -d ~/.vim/bundle/Vundle.vim ]]; then VUNDLE_INSTALLED=1; fi
+source $SHLIB_DIST
+f_set_log_level $LOG_LEVEL_DEBUG
+f_debug "Shlib inited"
+f_info "Running skeleton installation"
+f_debug "SKELETON_DIR=${SKELETON_DIR}"
+
+backup() {
+    local src="$1"
+    local backup_file="$($SKELETON_DIR/$(date +%Y%m%d))"
+    local lastmod=$(stat $src)
+    echo "### Backup of $src. Last modified on $lastmod" >> $backup_file
+    cat $src >> $backup_file
+}
 
 # Check if skeleton is already installed
-UPGRADE=0
+SKELETON_INSTALLED=0
+
+if [[ -f $SKELETON_FILE ]]; then 
+    SKELETON_INSTALLED=2
+    f_info "Found skeleton installation from older version"
+    rm $SKELETON_FILE
+    f_info "$SKELETON_FILE has been removed"
+fi
+
+if [[ -d $SKELETON_DIR ]]; then
+    SKELETON_INSTALLED=1
+    f_info "Found previous skeleton installation in $SKELETON_DIR"
+else
+    mkdir $SKELETON_DIR
+    f_info "Skeleton directory created in $SKELETON_DIR"
+fi
+
+
+# If already installed - ask user about update strategy
 FORCE_DOTFILES=0
 FORCE_VIM_PLUGINS=0
-if [[ -f $SKELETON_FILE ]]; then UPGRADE=1; fi
-if [ $UPGRADE == 1 ]; then
-    echo WARNING: upgrade mode
-fi
+DO_BACKUP=0
+
 
 # Detect git
 HAS_GIT=0
@@ -41,7 +72,7 @@ if [[ $? -eq 0 ]]; then HAS_GIT=1; fi
 # Install all items
 for item in $TARGETS; do
     if [[ -f $HOME/$item ]] && [[ $(diff profile/$item $HOME/$item) == "" ]]; then
-        echo INFO: $item is skipped as not changed
+        f_info "$item was skipped as not changed"
         continue
     fi
     echo Copying $item to $HOME
@@ -58,6 +89,4 @@ if [ $VUNDLE_INSTALLED != 1 ]; then
         echo git was not found. Please install Vundle bundle manually
     fi
 fi
-
-touch $SKELETON_FILE
 

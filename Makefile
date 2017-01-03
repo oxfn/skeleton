@@ -16,7 +16,7 @@ dist: $(SHLIBDIST)
 test: $(SHLIBDIST) $(SHLIBTEST)
 	shlib/tests/all
 
-install: scripts/install
+install: dist test scripts/install
 	scripts/install
 
 clean:

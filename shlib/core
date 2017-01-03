@@ -12,5 +12,16 @@ export STATUS_ERROR=1
 # @function: f_read_line
 # @description: Read line from standard input
 f_read_line() {
-    echo $(read)
+    local _res=""
+    read _res
+    echo $_res
 }
+
+# @function: f_read_char
+# @description: Read char from stdin
+f_read_char() {
+    local _res=""
+    read -n 1 _res
+    echo $_res
+}
+

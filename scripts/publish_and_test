@@ -1,0 +1,14 @@
+#!/bin/bash
+
+PATH_PUB=/tmp/skeleton
+
+if [ -d $PATH_PUB ]; then
+    sudo rm -rf $PATH_PUB
+fi
+
+git clone ./ $PATH_PUB
+pushd $PATH_PUB
+sudo chown -R test.test ./
+sudo chmod -R 0755 ./
+sudo -u test make install
+popd
