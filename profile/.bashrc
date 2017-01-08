@@ -61,14 +61,15 @@ common-aliases-off() {
 #    Git aliases on
 #
 git-aliases-on() {
-    GIT_ALIASES='a b c co d ds dc dcs l m psh pll r s st stl stp'
+    GIT_ALIASES='a b c co d dc dn ds dcs f l lol m psh pll r rh s sm st stk stl stp'
     alias a='git add'
     alias b='git branch'
     alias c='git commit'
     alias co='git checkout'
     alias d='git diff'
-    alias ds='git diff --stat'
     alias dc='git diff --cached'
+    alias dn='git diff --names-only'
+    alias ds='git diff --stat'
     alias dcs='git diff --cached --stat'
     alias f='git fetch'
     alias l='git log'
@@ -79,6 +80,7 @@ git-aliases-on() {
     alias r='git reset'
     alias rh='git reset --hard'
     alias s='git status'
+    alias sm='git status | more'
     alias st='git stash'
     alias stk='git stash --keep-index'
     alias stl='git stash list'
