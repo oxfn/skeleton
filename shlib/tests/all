@@ -57,7 +57,6 @@ t_end
 
 t_begin 'Log error (level match)'
 stderr=$(t_file stderr)
-echo $stderr
 f_error test 2> $stderr
 [ -f $stderr ] || t_err
 [[ "$(cat $stderr)" == '[ERR] test' ]] || t_err
