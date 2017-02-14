@@ -52,6 +52,7 @@ common-aliases-on() {
     alias la='ls -a --color'
     alias lla='ls -la --color'
     alias scr='screen -r'
+    alias wget-mirror='wget --mirror --convert-links --adjust-extension --page-requisites --no-parent'
 }
 common-aliases-off() {
     aliases-off $COMMON_ALIASES
