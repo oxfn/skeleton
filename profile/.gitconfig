@@ -2,10 +2,12 @@
     name = oxfn
     email = oxfn@ya.ru
 [core]
+    autocrlf = false
+    editor = vim
     excludesfile = ~/gitignore.txt
     text = auto
-    autocrlf = false
 [push]
     default = current
 [color]
     ui = auto
+
