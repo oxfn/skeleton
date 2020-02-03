@@ -3,11 +3,11 @@
 #
 #   TODO
 #
-#   [ ] Dynamic upgrade: ask for rewrite on startup
-#       [ ] Ask for rewrite of .dotfiles
+#   [v] Dynamic upgrade: ask for rewrite on startup
+#       [v] Ask for rewrite of .dotfiles
 #       [ ] Ask to reinstall Vim plugins
 #   [ ] Use shlib
-#   [ ] Merge .bashrc.local configuration
+#   [?] Merge .bashrc.local configuration
 #
 
 SHLIB_DIST=shlib/dist/shlib

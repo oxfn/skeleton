@@ -3,13 +3,14 @@
 .DEFAULT: dist 
 
 SHLIBSRC = shlib/core \
-		   shlib/log \
-		   shlib/net
+           shlib/log 
 SHLIBDIST = shlib/dist/shlib
 SHLIBTEST = shlib/tests/all
 
 $(SHLIBDIST): $(SHLIBSRC)
-	cat $(SHLIBSRC) |sed '/^\s*\(#.*\)\?$$/d' > $(SHLIBDIST)
+	cat $(SHLIBSRC) | sed \
+		-e '/^[[:blank:]]*\(#.*\)*$$/d'\
+		> $(SHLIBDIST)
 
 dist: $(SHLIBDIST)
 
