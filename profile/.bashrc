@@ -62,8 +62,9 @@ common-aliases-off() {
 #    Git aliases on
 #
 git-aliases-on() {
-    GIT_ALIASES='a b c co d dc dn ds dcs f l lol m psh pll r rh s sm st stk stl stp'
+    GIT_ALIASES='a au b c co d dc dn ds dcs f l lol m psh pll r rh s sm st stk stl stp'
     alias a='git add'
+    alias au='git add -u'
     alias b='git branch'
     alias c='git commit'
     alias co='git checkout'
